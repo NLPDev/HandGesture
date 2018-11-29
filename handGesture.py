@@ -25,4 +25,12 @@ while( cap.isOpened() ) :
                 cx = int(moments['m10']/moments['m00']) # cx = M10/M00
                 cy = int(moments['m01']/moments['m00']) # cy = M01/M00
               
-  
+    centr=(cx,cy)       
+    cv2.circle(img,centr,5,[0,0,255],2)       
+    cv2.drawContours(drawing,[cnt],0,(0,255,0),2) 
+    cv2.drawContours(drawing,[hull],0,(0,0,255),2) 
+          
+    cnt = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
+    hull = cv2.convexHull(cnt,returnPoints = False)
+    
+    
