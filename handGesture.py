@@ -33,4 +33,21 @@ while( cap.isOpened() ) :
     cnt = cv2.approxPolyDP(cnt,0.01*cv2.arcLength(cnt,True),True)
     hull = cv2.convexHull(cnt,returnPoints = False)
     
-    
+    if(1):
+               defects = cv2.convexityDefects(cnt,hull)
+               mind=0
+               maxd=0
+               for i in range(defects.shape[0]):
+                    s,e,f,d = defects[i,0]
+                    start = tuple(cnt[s][0])
+                    end = tuple(cnt[e][0])
+                    far = tuple(cnt[f][0])
+                    dist = cv2.pointPolygonTest(cnt,centr,True)
+                    cv2.line(img,start,end,[0,255,0],2)
+                    cv2.circle(img,far,5,[0,0,255],-1)
+    cv2.imshow('output',drawing)
+    cv2.imshow('input',img)
+                
+    k = cv2.waitKey(10)
+    if k == 27:
+        break
