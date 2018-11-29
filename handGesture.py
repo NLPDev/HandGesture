@@ -12,4 +12,17 @@ while( cap.isOpened() ) :
 
     max_area=1000
    
- 
+    for i in range(len(contours)):
+            cnt=contours[i]
+            area = cv2.contourArea(cnt)
+            if(area>max_area):
+                max_area=area
+                ci=i
+    cnt=contours[ci]
+    hull = cv2.convexHull(cnt)
+    moments = cv2.moments(cnt)
+    if moments['m00']!=0:
+                cx = int(moments['m10']/moments['m00']) # cx = M10/M00
+                cy = int(moments['m01']/moments['m00']) # cy = M01/M00
+              
+  
